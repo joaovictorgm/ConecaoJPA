@@ -1,4 +1,7 @@
 package br.com.api.repositorios;
 
-public interface AnimaisRepository {
+import br.com.api.entidades.Animais;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AnimaisRepository extends JpaRepository <Animais, Long> {
 }
