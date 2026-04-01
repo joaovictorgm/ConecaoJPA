@@ -32,33 +32,34 @@ public class AnimaisController {
 
     }
     @PostMapping("/criar")
-    public ResponseEntity<Pessoas> criar(
+    public ResponseEntity<Animais> criar(
             @RequestBody PessoasRequestDTO pessoa) {
         Animais animaisPersist = new Animais();
         animaisPersist.setNome(Animais.getNome());
-        animaisPersist.setSobrenome(pessoa.getSobrenome());
+        animaisPersist.setRaca(Animais.getRaca());
+        animaisPersist.setPeso(Animais.getRaca());
 
-        Pessoas retorno = animaisRepository.save(animaisPersist);
+        Animais retorno = animaisRepository.save(animaisPersist);
 
         return ResponseEntity.status(201).body(retorno);
 
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Pessoas> atualizar(
-            @RequestBody PessoasRequestDTO pessoa,
+    public ResponseEntity<Animais> atualizar(
+            @RequestBody AnimaisRequestDTO animais,
             @PathVariable Long id
     ){
 
 
-        if(pessoasRepository.existsById(id)) {
+        if(animaisRepository.existsById(id)) {
 
-            Pessoas pessoaPersist = new Pessoas();
-            pessoaPersist.setNome(pessoa.getNome());
-            pessoaPersist.setSobrenome(pessoa.getSobrenome());
-            pessoaPersist.setId(id);
+            Animais animaisPersist = new Animais();
+            animaisPersist.setNome(animais.getNome());
+            animaisPersist.setRaca(animais.getSobrenome());
+            animaisPersist.setId(id);
 
-            Pessoas retorno = pessoasRepository.save(pessoaPersist);
+            Pessoas retorno = animaisRepository.save(animaisPersist);
 
             return ResponseEntity.ok(retorno);
 
@@ -71,8 +72,8 @@ public class AnimaisController {
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deletar(
             @PathVariable Long id) {
-        if(pessoasRepository.existsById(id)){
-            pessoasRepository.deleteById(id);
+        if(animaisRepository.existsById(id)){
+            animaisRepository.deleteById(id);
 
             return ResponseEntity.ok(null);
 
