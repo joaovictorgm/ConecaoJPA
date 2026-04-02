@@ -3,19 +3,28 @@ package br.com.api.entidades;
 import jakarta.persistence.*;
 
 @Entity
-public class Animais {
+@Table(name = "animais")
+public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
+    private static String nome;
 
     @Column(nullable = false)
     private String raca;
 
     @Column(nullable = false)
     private double peso;
+    public Animal() {
+    }
+
+    public Animal(String nome, String raca, Double peso) {
+        this.nome = nome;
+        this.raca = raca;
+        this.peso = peso;
+    }
 
     public Long getId() {
         return id;
@@ -33,7 +42,7 @@ public class Animais {
         this.nome = nome;
     }
 
-    public String getRaca() {
+    public  String getRaca() {
         return raca;
     }
 
@@ -41,7 +50,7 @@ public class Animais {
         this.raca = raca;
     }
 
-    public double getPeso() {
+    public  double getPeso() {
         return peso;
     }
 

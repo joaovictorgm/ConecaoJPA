@@ -1,7 +1,8 @@
 package br.com.api.controllers;
 
+import br.com.api.dtos.AnimaisRequestDTO;
 import br.com.api.dtos.PessoasRequestDTO;
-import br.com.api.entidades.Animais;
+import br.com.api.entidades.Animal;
 import br.com.api.entidades.Pessoas;
 import br.com.api.repositorios.AnimaisRepository;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class AnimaisController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Animais>> listar() {
-        List<Animais> animaisList = animaisRepository.findAll();
+    public ResponseEntity<List<Animal>> listar() {
+        List<Animal> animaisList = animaisRepository.findAll();
 
         if (animaisList.isEmpty()) {
             return ResponseEntity.status(204).body(null);
@@ -32,21 +33,21 @@ public class AnimaisController {
 
     }
     @PostMapping("/criar")
-    public ResponseEntity<Animais> criar(
-            @RequestBody PessoasRequestDTO pessoa) {
-        Animais animaisPersist = new Animais();
-        animaisPersist.setNome(Animais.getNome());
-        animaisPersist.setRaca(Animais.getRaca());
-        animaisPersist.setPeso(Animais.getRaca());
+    public ResponseEntity<Animal> criar(
+            @RequestBody AnimaisRequestDTO Animal) {
+        Animal animaisPersist = new Animal();
+        animaisPersist.setNome(Animal.getNome());
+        animaisPersist.setRaca(Animal.getRaca());
+        animaisPersist.setPeso(Animal.getPeso());
 
-        Animais retorno = animaisRepository.save(animaisPersist);
+        Animal retorno = animaisRepository.save(animaisPersist);
 
         return ResponseEntity.status(201).body(retorno);
 
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Animais> atualizar(
+    public ResponseEntity<Animal> atualizar(
             @RequestBody AnimaisRequestDTO animais,
             @PathVariable Long id
     ){
@@ -54,12 +55,12 @@ public class AnimaisController {
 
         if(animaisRepository.existsById(id)) {
 
-            Animais animaisPersist = new Animais();
+            Animal animaisPersist = new Animal();
             animaisPersist.setNome(animais.getNome());
-            animaisPersist.setRaca(animais.getSobrenome());
+            animaisPersist.setRaca(animais.getRaca());
             animaisPersist.setId(id);
 
-            Pessoas retorno = animaisRepository.save(animaisPersist);
+            Animal retorno = animaisRepository.save(animaisPersist);
 
             return ResponseEntity.ok(retorno);
 

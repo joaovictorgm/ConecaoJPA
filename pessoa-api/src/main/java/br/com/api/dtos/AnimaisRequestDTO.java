@@ -1,6 +1,6 @@
 package br.com.api.dtos;
 
-public class AnimaisRequesDTO {
+public class AnimaisRequestDTO {
     private String nome;
     private String raca;
     private  Double peso;
